@@ -1,0 +1,205 @@
+/* ====== Variables ====== */
+:root {
+  --Dark-Text: hsl(229, 25%, 31%);
+  --Score-Text: hsl(229, 64%, 46%);
+  --Header-Outline: hsl(217, 16%, 45%);
+
+  --Scissors-Gradient: linear-gradient(135deg, hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+  --Paper-Gradient: linear-gradient(135deg, hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+  --Rock-Gradient: linear-gradient(135deg, hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+  --Lizard-Gradient: linear-gradient(135deg, hsl(261, 73%, 60%), hsl(261, 72%, 63%));
+  --Spock-Gradient: linear-gradient(135deg, hsl(189, 59%, 53%), hsl(189, 58%, 57%));
+  --Radial-Gradient: radial-gradient(circle at top, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+}
+
+/* ====== Reset & Base ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  background: var(--Radial-Gradient);
+  padding: 0 16px;
+}
+
+main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid var(--Header-Outline);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+
+header > img {
+  max-width: 130px;
+  -webkit-user-drag: none;
+}
+
+.score-wrapper {
+  width: 120px;
+  padding: 5px;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--Score-Text);
+  letter-spacing: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-wrapper > span {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--Dark-Text);
+}
+
+.options-container {
+  background: url("./assets/bg-pentagon.svg") no-repeat center;
+  background-size: contain;
+  width: 100%;
+  max-width: 450px;
+  height: 450px;
+  position: relative;
+  margin: 100px auto 0 auto;
+}
+
+/* Place each button at a pentagon corner */
+.option-btn {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: inset 0 -5px rgba(0, 0, 0, 0.35);
+}
+
+.option-btn-inner {
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 5px rgba(0, 0, 0, 0.35);
+}
+
+/* Scissors: Top */
+.option-btn.scissors {
+  top: -5%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: var(--Scissors-Gradient);
+}
+
+.option-btn.scissors > .option-btn-inner {
+  background: url("./assets/icon-scissors.svg") no-repeat center;
+  background-color: #fff;
+  background-size: 50%;
+}
+
+.option-btn.scissors:hover {
+  transform: translate(-50%, -5%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), inset 0 -5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Spock: Middle left */
+.option-btn.spock {
+  top: 40%;
+  left: 7%;
+  transform: translate(-50%, -50%);
+  background: var(--Spock-Gradient);
+}
+
+.option-btn.spock > .option-btn-inner {
+  background: url("./assets/icon-spock.svg") no-repeat center;
+  background-color: #fff;
+  background-size: 50%;
+}
+
+.option-btn.spock:hover {
+  transform: translate(-50%, -55%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), inset 0 -5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Paper: Middle right */
+.option-btn.paper {
+  top: 40%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  background: var(--Paper-Gradient);
+}
+
+.option-btn.paper > .option-btn-inner {
+  background: url("./assets/icon-paper.svg") no-repeat center;
+  background-color: #fff;
+  background-size: 50%;
+}
+
+.option-btn.paper:hover {
+  transform: translate(-50%, -55%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), inset 0 -5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Lizard: Bottom left */
+.option-btn.lizard {
+  top: 90%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  background: var(--Lizard-Gradient);
+}
+
+.option-btn.lizard > .option-btn-inner {
+  background: url("./assets/icon-lizard.svg") no-repeat center;
+  background-color: #fff;
+  background-size: 50%;
+}
+
+.option-btn.lizard:hover {
+  transform: translate(-50%, -55%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), inset 0 -5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Rock: Bottom right */
+.option-btn.rock {
+  top: 90%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  background: var(--Rock-Gradient);
+}
+
+.option-btn.rock > .option-btn-inner {
+  background: url("./assets/icon-rock.svg") no-repeat center;
+  background-color: #fff;
+  background-size: 50%;
+}
+
+.option-btn.rock:hover {
+  transform: translate(-50%, -55%) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), inset 0 -5px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
