@@ -1,8 +1,7 @@
 import rulesImg from "../assets/image-rules-bonus.svg";
 import closeIcon from "../assets/icon-close.svg";
 
-export default function RulesModal(props) {
-  const { setShowRulesModal } = props;
+export default function RulesModal({ setShowRulesModal }) {
   return (
     <div className="rules-modal-container">
       <div className="rules-modal">
