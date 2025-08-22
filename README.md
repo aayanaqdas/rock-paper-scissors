@@ -2,6 +2,11 @@
 
 An animated implementation of the Rock Paper Scissors Lizard Spock game made famous by _The Big Bang Theory_.
 
+
+## Demo
+https://github.com/user-attachments/assets/0c4eb8cd-f2fc-4782-b283-85a30e3e66f2
+
+
 ## Game Rules
 
 As explained by Sheldon Cooper:
