@@ -22,6 +22,11 @@ body {
   font-family: "Barlow Semi Condensed", sans-serif;
   background: var(--Radial-Gradient);
   padding: 0 16px;
+  min-height: 100vh;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 img {
@@ -29,23 +34,28 @@ img {
 }
 
 main {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 0px 16px;
+  padding: 16px;
 }
 
 .game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1366px;
+  width: 100%;
+  max-width: 1366px;
+  flex: 1;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 16px 0;
 }
 
 header {
-  margin-top: 16px;
+  margin-top: 0;
   width: 100%;
   max-width: 700px;
   display: flex;
@@ -53,40 +63,44 @@ header {
   align-items: center;
   border: 2px solid var(--Header-Outline);
   border-radius: 8px;
-  padding: 18px 20px;
+  padding: 12px 16px;
 }
 
 header > img {
-  max-width: 130px;
+  max-width: 100px;
+  height: auto;
 }
 
 .score-wrapper {
-  width: 120px;
-  padding: 5px;
+  width: 100px;
+  height: 100%;
+  padding: 10px 5px;
   background: #fff;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: var(--Score-Text);
   letter-spacing: 1px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .score-wrapper > span {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--Dark-Text);
+  line-height: 1;
 }
 
 .options-container {
   background: url("./assets/bg-pentagon.svg") no-repeat center;
   background-size: contain;
-  width: 450px;
-  height: 450px;
+  width: 280px;
+  height: 280px;
   position: relative;
-  margin: 100px 0 0 0;
+  margin: 40px 0;
   flex-shrink: 0;
   flex-grow: 0;
 }
@@ -94,15 +108,15 @@ header > img {
 /* Place each button at a pentagon corner */
 .option-btn {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
-  box-shadow: inset 0 -5px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.35);
   transition: box-shadow 0.18s ease-out, transform 0.18s ease-out;
 }
 
@@ -113,17 +127,17 @@ header > img {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 5px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 3px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes shadow-fill {
   0% {
     box-shadow: 0 0 0 0 rgba(210, 210, 230, 0.08), 0 0 0 0 rgba(220, 220, 240, 0.04),
-      inset 0 -5px rgba(0, 0, 0, 0.35);
+      inset 0 -3px rgba(0, 0, 0, 0.35);
   }
   100% {
-    box-shadow: 0 0 2px 16px rgba(210, 210, 230, 0.08), 0 0 2px 44px rgba(220, 220, 240, 0.04),
-      inset 0 -5px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 0 2px 12px rgba(210, 210, 230, 0.08), 0 0 2px 24px rgba(220, 220, 240, 0.04),
+      inset 0 -3px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -225,7 +239,7 @@ header > img {
 .rules-btn-wrapper {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .rules-btn-wrapper .rules-btn {
@@ -233,10 +247,12 @@ header > img {
   border: 2px solid var(--Header-Outline);
   border-radius: 8px;
   color: #fff;
-  padding: 12px 44px;
+  padding: 8px 24px;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 100px;
 }
 
 .rules-btn:hover {
@@ -251,12 +267,15 @@ header > img {
 .rules-modal-container {
   height: 100vh;
   width: 100%;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.391);
+  padding: 16px;
 }
 
 .rules-modal {
@@ -265,9 +284,12 @@ header > img {
   flex-direction: column;
   align-items: center;
   padding: 16px 20px;
-  width: 400px;
-  height: 500px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  max-height: 90vh;
   border-radius: 12px;
+  overflow-y: auto;
 }
 
 .rules-modal .rules-text_close-btn {
@@ -277,12 +299,14 @@ header > img {
   color: var(--Dark-Text);
   font-size: 1rem;
   font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .rules-modal .rules-text_close-btn button {
   border: none;
   background: transparent;
   cursor: pointer;
+  padding: 8px;
 }
 
 .rules-modal .rules-img-wrapper {
@@ -293,33 +317,51 @@ header > img {
   width: 100%;
 }
 
+.rules-modal .rules-img-wrapper img {
+  max-width: 100%;
+  height: auto;
+}
+
 .game-result-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 40px;
   width: 100%;
   max-width: 900px;
-  height: 450px;
-  margin-top: 100px;
+  margin: 40px 0;
+  padding: 0 16px;
+}
+
+.picks-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  gap: 20px;
 }
 
 .result-text_btn-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
 }
 
 .result-text_btn-container h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 600;
   letter-spacing: 2px;
   color: #fff;
   text-transform: uppercase;
+  margin: 0;
 }
 
 .result-text_btn-container button {
-  padding: 10px;
+  padding: 12px 24px;
   border: 2px solid #fff;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -328,6 +370,9 @@ header > img {
   text-transform: uppercase;
   color: var(--Dark-Text);
   cursor: pointer;
+  background: #fff;
+  width: 100%;
+  max-width: 200px;
 }
 
 .result-text_btn-container button:hover {
@@ -344,23 +389,25 @@ header > img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
+  gap: 20px;
+  flex: 1;
 }
 
 .player-pick-container h1,
 .computer-pick-container h1 {
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin: 0;
+  text-align: center;
 }
 
 .player-pick-wrapper,
 .computer-pick-wrapper {
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 150px;
   background-color: rgba(0, 0, 0, 0.112);
   border-radius: 50%;
   display: flex;
@@ -378,7 +425,7 @@ header > img {
   justify-content: center;
   cursor: pointer;
   border: none;
-  box-shadow: inset 0 -5px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 -3px rgba(0, 0, 0, 0.35);
   transition: box-shadow 0.18s ease-out, transform 0.18s ease-out;
 }
 
@@ -439,6 +486,400 @@ header > img {
 
 .player-pick-btn.winner,
 .computer-pick-btn.winner {
-  box-shadow: 0 0 0 50px rgba(210, 210, 230, 0.04), 0 0 0 100px rgba(220, 220, 240, 0.02),
-    0 0 0 160px rgba(220, 220, 240, 0.04), inset 0 -5px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 20px rgba(210, 210, 230, 0.04), 0 0 0 40px rgba(220, 220, 240, 0.02),
+    0 0 0 60px rgba(220, 220, 240, 0.04), inset 0 -3px rgba(0, 0, 0, 0.35);
+}
+
+/* Mobile styles - side by side layout */
+@media (max-width: 599px) {
+  .game-container {
+    min-height: 100vh;
+    height: 100vh;
+    justify-content: space-evenly;
+  }
+
+  .options-container {
+    width: 260px;
+    height: 260px;
+  }
+
+  .option-btn {
+    width: 100px;
+    height: 100px;
+  }
+
+  .game-result-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px 0;
+    padding: 0 16px;
+  }
+
+  .player-pick-container,
+  .computer-pick-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    flex: 0 0 40%;
+    max-width: 40%;
+    min-height: 160px;
+  }
+
+  .player-pick-container h1,
+  .computer-pick-container h1 {
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 0.8rem;
+  }
+
+  .player-pick-wrapper,
+  .computer-pick-wrapper {
+    height: 120px;
+    width: 120px;
+  }
+
+  .result-text_btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    flex: 0 0 100%;
+    order: 2;
+  }
+
+  .result-text_btn-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .rules-btn-wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Full screen rules modal for mobile */
+  .rules-modal-container {
+    padding: 0;
+  }
+
+  .rules-modal {
+    width: 100%;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    padding: 32px 24px;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  .rules-modal .rules-text_close-btn {
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .rules-modal .rules-text_close-btn button {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 11;
+  }
+
+  .rules-modal .rules-text_close-btn button img {
+    width: 28px;
+    height: 28px;
+    opacity: 0.7;
+  }
+
+  .rules-modal .rules-img-wrapper {
+    flex: 1;
+    margin: 64px 0 140px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 600px) {
+  body {
+    padding: 0 32px;
+  }
+
+  main {
+    padding: 32px;
+  }
+
+  .game-container {
+    padding: 32px 0;
+  }
+
+  header {
+    padding: 18px 24px;
+  }
+
+  header > img {
+    max-width: 120px;
+  }
+
+  .score-wrapper {
+    width: 100px;
+    padding: 12px 8px;
+    font-size: 0.8rem;
+  }
+
+  .score-wrapper > span {
+    font-size: 2.5rem;
+  }
+
+  .options-container {
+    width: 350px;
+    height: 350px;
+    margin: 60px 0;
+  }
+
+  .option-btn {
+    width: 130px;
+    height: 130px;
+    box-shadow: inset 0 -4px rgba(0, 0, 0, 0.35);
+  }
+
+  .option-btn-inner {
+    box-shadow: inset 0 4px rgba(0, 0, 0, 0.35);
+  }
+
+  @keyframes shadow-fill {
+    0% {
+      box-shadow: 0 0 0 0 rgba(210, 210, 230, 0.08), 0 0 0 0 rgba(220, 220, 240, 0.04),
+        inset 0 -4px rgba(0, 0, 0, 0.35);
+    }
+    100% {
+      box-shadow: 0 0 2px 14px rgba(210, 210, 230, 0.08), 0 0 2px 32px rgba(220, 220, 240, 0.04),
+        inset 0 -4px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  .rules-btn-wrapper {
+    justify-content: flex-end;
+  }
+
+  .rules-btn-wrapper .rules-btn {
+    padding: 10px 36px;
+  }
+
+  .game-result-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    margin: 60px 0;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .result-text_btn-container {
+    order: 0;
+    flex: 0 0 auto;
+    min-width: 200px;
+  }
+
+  .result-text_btn-container h1 {
+    font-size: 2.5rem;
+  }
+
+  .player-pick-container,
+  .computer-pick-container {
+    gap: 30px;
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  .player-pick-container h1,
+  .computer-pick-container h1 {
+    font-size: 1rem;
+  }
+
+  .player-pick-wrapper,
+  .computer-pick-wrapper {
+    height: 200px;
+    width: 200px;
+  }
+
+  .player-pick-btn,
+  .computer-pick-btn {
+    box-shadow: inset 0 -4px rgba(0, 0, 0, 0.35);
+  }
+
+  .player-pick-btn.winner,
+  .computer-pick-btn.winner {
+    box-shadow: 0 0 0 30px rgba(210, 210, 230, 0.04), 0 0 0 60px rgba(220, 220, 240, 0.02),
+      0 0 0 90px rgba(220, 220, 240, 0.04), inset 0 -4px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .options-container {
+    width: 450px;
+    height: 450px;
+    margin: 100px 0;
+  }
+
+  .option-btn {
+    width: 150px;
+    height: 150px;
+    box-shadow: inset 0 -5px rgba(0, 0, 0, 0.35);
+  }
+
+  .option-btn-inner {
+    box-shadow: inset 0 5px rgba(0, 0, 0, 0.35);
+  }
+
+  @keyframes shadow-fill {
+    0% {
+      box-shadow: 0 0 0 0 rgba(210, 210, 230, 0.08), 0 0 0 0 rgba(220, 220, 240, 0.04),
+        inset 0 -5px rgba(0, 0, 0, 0.35);
+    }
+    100% {
+      box-shadow: 0 0 2px 16px rgba(210, 210, 230, 0.08), 0 0 2px 44px rgba(220, 220, 240, 0.04),
+        inset 0 -5px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  header > img {
+    max-width: 130px;
+  }
+
+  .score-wrapper {
+    width: 120px;
+    font-size: 0.9rem;
+  }
+
+  .score-wrapper > span {
+    font-size: 3rem;
+  }
+
+  .rules-btn-wrapper .rules-btn {
+    padding: 12px 44px;
+  }
+
+  .game-result-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 450px;
+    margin-top: 100px;
+    flex-wrap: nowrap;
+    gap: 80px;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .result-text_btn-container {
+    order: 0;
+    flex: 0 0 auto;
+    min-width: 220px;
+  }
+
+  .result-text_btn-container h1 {
+    font-size: 3rem;
+  }
+
+  .player-pick-container h1,
+  .computer-pick-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .player-pick-container,
+  .computer-pick-container {
+    gap: 50px;
+    flex: 0 0 auto;
+    max-width: none;
+  }
+
+  .player-pick-wrapper,
+  .computer-pick-wrapper {
+    height: 250px;
+    width: 250px;
+  }
+
+  .player-pick-btn,
+  .computer-pick-btn {
+    box-shadow: inset 0 -5px rgba(0, 0, 0, 0.35);
+  }
+
+  .player-pick-btn.winner,
+  .computer-pick-btn.winner {
+    box-shadow: 0 0 0 50px rgba(210, 210, 230, 0.04), 0 0 0 100px rgba(220, 220, 240, 0.02),
+      0 0 0 160px rgba(220, 220, 240, 0.04), inset 0 -5px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Large desktop styles */
+@media (min-width: 1366px) {
+  .rules-modal {
+    width: 400px;
+    height: 500px;
+  }
+}
+
+/* Extra small mobile adjustments */
+@media (max-width: 320px) {
+  .options-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .option-btn {
+    width: 80px;
+    height: 80px;
+  }
+
+  .score-wrapper {
+    width: 70px;
+    padding: 6px 4px;
+    font-size: 0.6rem;
+  }
+
+  .score-wrapper > span {
+    font-size: 1.8rem;
+  }
+
+  header > img {
+    max-width: 80px;
+  }
+
+  .result-text_btn-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .player-pick-wrapper,
+  .computer-pick-wrapper {
+    height: 120px;
+    width: 120px;
+  }
 }
