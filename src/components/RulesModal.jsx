@@ -4,10 +4,8 @@ import closeIcon from "../assets/icon-close.svg";
 
 export default function RulesModal({ setShowRulesModal }) {
   useEffect(() => {
-    // Add class to body when modal opens
     document.body.classList.add("modal-open");
 
-    // Remove class when modal closes
     return () => {
       document.body.classList.remove("modal-open");
     };

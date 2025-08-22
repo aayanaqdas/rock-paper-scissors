@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "./components/Header";
 import Options from "./components/Options";
@@ -13,27 +13,9 @@ export default function App() {
   const [gameResult, setGameResult] = useState(null);
   const [score, setScore] = useState(0);
 
-  // Win conditions: what each option beats
-  const winConditions = {
-    rock: ["scissors", "lizard"],
-    paper: ["rock", "spock"],
-    scissors: ["paper", "lizard"],
-    lizard: ["paper", "spock"],
-    spock: ["rock", "scissors"],
-  };
-
-  function determineWinner(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) {
-      return "tie";
-    }
-
-    if (winConditions[playerChoice].includes(computerChoice)) {
-      setScore((prev) => (prev += 1));
-      return "win";
-    } else {
-      return "lose";
-    }
-  }
+  const updateScore = useCallback(() => {
+    setScore((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     const options = ["scissors", "spock", "paper", "lizard", "rock"];
@@ -45,7 +27,23 @@ export default function App() {
 
   useEffect(() => {
     if (playerPick && computerPick) {
-      const result = determineWinner(playerPick, computerPick);
+      // Win conditions: what each option beats
+      const winConditions = {
+        rock: ["scissors", "lizard"],
+        paper: ["rock", "spock"],
+        scissors: ["paper", "lizard"],
+        lizard: ["paper", "spock"],
+        spock: ["rock", "scissors"],
+      };
+
+      let result;
+      if (playerPick === computerPick) {
+        result = "tie";
+      } else if (winConditions[playerPick].includes(computerPick)) {
+        result = "win";
+      } else {
+        result = "lose";
+      }
       setGameResult(result);
     }
   }, [playerPick, computerPick]);
@@ -74,6 +72,7 @@ export default function App() {
             computerPick={computerPick}
             newGame={() => newGame()}
             gameResult={gameResult}
+            onScoreUpdate={updateScore}
           />
         )}
 
